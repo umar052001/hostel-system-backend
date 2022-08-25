@@ -5,6 +5,10 @@ const knex = require("knex");
 
 const { handleOwnerRegister } = require("./controllers/owner/signup-owner");
 const { handleOwnerSignin } = require("./controllers/owner/signin-owner");
+const { handleAdd } = require("./controllers/hostels/add-hostel");
+const { handleDelete } = require("./controllers/hostels/delete-hostel");
+const { handleUpdate } = require("./controllers/hostels/update-hostel");
+const { handleOwnerHostels } = require("./controllers/owner/readOwner-hostel");
 
 const db = knex({
   // connect to database:
@@ -40,6 +44,18 @@ app.get("/", (req, res) => {
 app.post("/signinOwner", handleOwnerSignin(db, bcrypt));
 app.post("/signupOwner", (req, res) => {
   handleOwnerRegister(req, res, db, bcrypt);
+});
+app.post("/addHostels/:email", (req, res) => {
+  handleAdd(req, res, db);
+});
+app.delete("/deleteHostels/:id", (req, res) => {
+  handleDelete(req, res, db);
+});
+app.put("/updateHostels/:id", (req, res) => {
+  handleUpdate(req, res, db);
+});
+app.get("/getOwnerHostels/:email", (req, res) => {
+  handleOwnerHostels(req, res, db);
 });
 
 //Port
