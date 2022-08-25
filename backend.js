@@ -42,6 +42,7 @@ app.get("/", (req, res) => {
 
 //Owner
 app.post("/signinOwner", handleOwnerSignin(db, bcrypt));
+
 app.post("/signupOwner", (req, res) => {
   handleOwnerRegister(req, res, db, bcrypt);
 });
@@ -55,6 +56,11 @@ app.put("/updateHostels/:id", (req, res) => {
   handleUpdate(req, res, db);
 });
 app.get("/getOwnerHostels/:email", (req, res) => {
+  handleOwnerHostels(req, res, db);
+});
+
+//Tenant
+app.get("/getTenantHostels", (req, res) => {
   handleOwnerHostels(req, res, db);
 });
 

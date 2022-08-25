@@ -1,5 +1,6 @@
 const handleOwnerHostels = (req, res, db) => {
   const { email } = req.params;
+
   db.select()
     .from("hostels")
     .where("owneremail", "=", email)
