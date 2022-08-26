@@ -4,11 +4,15 @@ const cors = require("cors");
 const knex = require("knex");
 
 const { handleOwnerRegister } = require("./controllers/owner/signup-owner");
+const { handleTenantRegister } = require("./controllers/tenant/signup-tenant");
 const { handleOwnerSignin } = require("./controllers/owner/signin-owner");
 const { handleAdd } = require("./controllers/hostels/add-hostel");
 const { handleDelete } = require("./controllers/hostels/delete-hostel");
 const { handleUpdate } = require("./controllers/hostels/update-hostel");
 const { handleOwnerHostels } = require("./controllers/owner/readOwner-hostel");
+const {
+  handleTenantHostels,
+} = require("./controllers/tenant/readTenant-hostel");
 
 const db = knex({
   // connect to database:
@@ -61,9 +65,12 @@ app.get("/getOwnerHostels/:email", (req, res) => {
 
 //Tenant
 app.get("/getTenantHostels", (req, res) => {
-  handleOwnerHostels(req, res, db);
+  handleTenantHostels(req, res, db);
 });
 
+app.post("/signupTenant", (req, res) => {
+  handleTenantRegister(req, res, db, bcrypt);
+});
 //Port
 app.listen(3001, (req, res) => {
   console.log(`Server listening on port 3001`);

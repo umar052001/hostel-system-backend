@@ -1,6 +1,6 @@
 const handleOwnerRegister = (req, res, db, bcrypt) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
+  const { email, password, name } = req.body;
+  if (!email || !password || !name) {
     return res.status(400).json("incorrect form submission");
   }
   const saltRounds = 10;
@@ -12,6 +12,7 @@ const handleOwnerRegister = (req, res, db, bcrypt) => {
       .insert({
         email: email,
         password: hash,
+        name: name,
       })
       .into("owner")
       .then((owner) => {
