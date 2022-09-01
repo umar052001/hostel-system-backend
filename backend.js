@@ -6,6 +6,7 @@ const knex = require("knex");
 const { handleOwnerRegister } = require("./controllers/owner/signup-owner");
 const { handleTenantRegister } = require("./controllers/tenant/signup-tenant");
 const { handleOwnerSignin } = require("./controllers/owner/signin-owner");
+const { handleTenantSignin } = require("./controllers/tenant/signin-tenant");
 const { handleAdd } = require("./controllers/hostels/add-hostel");
 const { handleDelete } = require("./controllers/hostels/delete-hostel");
 const { handleUpdate } = require("./controllers/hostels/update-hostel");
@@ -46,6 +47,7 @@ app.get("/", (req, res) => {
 
 //Owner
 app.post("/signinOwner", handleOwnerSignin(db, bcrypt));
+app.post("/signinTenant", handleTenantSignin(db, bcrypt));
 
 app.post("/signupOwner", (req, res) => {
   handleOwnerRegister(req, res, db, bcrypt);
