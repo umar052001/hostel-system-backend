@@ -6,7 +6,6 @@ const handleOwnerRegister = (req, res, db, bcrypt) => {
   const saltRounds = 10;
   const salt = bcrypt.genSaltSync(saltRounds);
   const hash = bcrypt.hashSync(password, salt);
-  console.log(hash);
   db.transaction((trx) => {
     trx
       .insert({
@@ -24,5 +23,5 @@ const handleOwnerRegister = (req, res, db, bcrypt) => {
 };
 
 module.exports = {
-  handleOwnerRegister: handleOwnerRegister,
+  handleOwnerRegister,
 };
